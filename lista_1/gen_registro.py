@@ -1,7 +1,10 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import sys
 from random import randint, choice
+from lista_1_q2 import remove_duplicatas
 
-ids_inscricao = list(range(1, 10000))
 cursos = ['BCC', 'ADM', 'ENG. ELETRONICA', 'ENG. AMBIENTAL', 'ENG. ELETRICA',
           'LETRAS', 'REDES']
 
@@ -52,7 +55,7 @@ def generate_file_registros(filename, line_size, file_size=None, lines=None, rep
             return True
 
         with open(filename, 'wb') as arq:
-            count = 1
+            count = 0
             while count < lines:
                 registro = generate_random_registro(count)
                 if primo(count):
@@ -65,7 +68,7 @@ def generate_file_registros(filename, line_size, file_size=None, lines=None, rep
                 count += 1
     else:
         with open(filename, 'wb') as arq:
-            count = 1
+            count = 0
             while count < lines:
                 registro = generate_random_registro(count)
                 arq.write(registro + b'\n')
@@ -74,5 +77,8 @@ def generate_file_registros(filename, line_size, file_size=None, lines=None, rep
 
 if __name__ == "__main__":
     repeat = (len(sys.argv) > 3 and sys.argv[3].upper() == 'T')
-    generate_file_registros(sys.argv[1], line_size=92, lines=int(sys.argv[2]), repeat=repeat)
+    generate_file_registros(sys.argv[1], line_size=93, lines=int(sys.argv[2]), repeat=repeat)
+    if (len(sys.argv) > 3 and sys.argv[3].upper() == 'D'):
+        remove_duplicatas(sys.argv[1], sys.argv[1] + 'sem_duplicatas')
+
     # sorted(aux, key=lambda registro: int(registro[24:27]))
